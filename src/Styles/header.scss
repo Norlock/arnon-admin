@@ -1,0 +1,14 @@
+.navbar {
+    display: flex;
+    padding: 10px;
+
+    .nav-list {
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+
+        li {
+            margin-right: 10px;
+        }
+    }
+}

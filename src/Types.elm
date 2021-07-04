@@ -14,8 +14,8 @@ type alias Model =
 type alias Product =
     { id : Int
     , title : String
-    , description_short : String
-    , description_long : String
+    , descriptionShort : String
+    , descriptionLong : String
     , price : Float
     , stock : Int
     , brand : String

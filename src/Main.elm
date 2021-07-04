@@ -64,7 +64,7 @@ body : Model -> Html Msg
 body model =
     div [ class "container" ]
         [ navbar model
-        , div [] [ text "products" ]
+        , div [ class "content" ] [ productListView model ]
         ]
 
 
@@ -76,11 +76,34 @@ navbar _ =
                 [ a
                     [ href "/", class "nav-link" ]
                     [ text "Home" ]
-                , a
+                ]
+            , li []
+                [ a
                     [ href "/products", class "nav-link" ]
                     [ text "Products" ]
                 ]
             ]
+        ]
+
+
+productListView : Model -> Html Msg
+productListView model =
+    model.products
+        |> List.map (\product -> productView product)
+        |> div []
+
+
+productView : Product -> Html Msg
+productView product =
+    div [ class "product-container" ]
+        [ span [ class "title" ] [ text product.title ]
+        , span [ class "description-short" ] [ text product.descriptionShort ]
+        , span [ class "description-long" ] [ text product.descriptionLong ]
+        , span [ class "price" ] [ text (String.fromFloat product.price) ]
+        , span [ class "stock" ] [ text (String.fromInt product.stock) ]
+        , span [ class "brand" ] [ text product.brand ]
+        , span [ class "color" ] [ text product.color ]
+        , span [ class "size" ] [ text product.size ]
         ]
 
 
