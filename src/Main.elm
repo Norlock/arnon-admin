@@ -1,5 +1,6 @@
 module Main exposing (..)
 
+import Api
 import Browser
 import Browser.Navigation as Nav
 import Html exposing (..)
@@ -22,7 +23,11 @@ main =
 
 init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init _ _ _ =
-    ( { name = "" }, Cmd.none )
+    ( { name = ""
+      , products = []
+      }
+    , Api.fetchProductList
+    )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -33,6 +38,19 @@ update msg model =
 
         ClickedLink _ ->
             ( model, Cmd.none )
+
+        FetchedProductList result ->
+            case result of
+                Ok products ->
+                    ( { model | products = products }, Cmd.none )
+
+                Err _ ->
+                    ( model, Cmd.none )
+
+
+setProductList : Model -> List Product -> Model
+setProductList model products =
+    { model | products = products }
 
 
 view : Model -> Browser.Document Msg
