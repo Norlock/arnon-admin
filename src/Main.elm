@@ -37,7 +37,7 @@ update msg model =
 
 view : Model -> Browser.Document Msg
 view model =
-    { title = "Ev charge"
+    { title = "Arnon admin"
     , body = [ body model ]
     }
 
@@ -45,7 +45,25 @@ view model =
 body : Model -> Html Msg
 body model =
     div [ class "container" ]
-        [ text "hallo" ]
+        [ navbar model
+        , div [] [ text "products" ]
+        ]
+
+
+navbar : Model -> Html Msg
+navbar _ =
+    div [ class "navbar" ]
+        [ ul [ class "nav-list" ]
+            [ li []
+                [ a
+                    [ href "/", class "nav-link" ]
+                    [ text "Home" ]
+                , a
+                    [ href "/products", class "nav-link" ]
+                    [ text "Products" ]
+                ]
+            ]
+        ]
 
 
 
